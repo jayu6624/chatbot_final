@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" /> -->
+    <title>Login</title>
+    <style>
+        body {
+            background-image: url('https://img.freepik.com/free-vector/background-realistic-abstract-technology-particle_23-2148431735.jpg?w=996&t=st=1716469493~exp=1716470093~hmac=0acabae57f5d8db7f3922d8982677f74c4a05eb096fd2615fe89c5eee3c55d87');
+        }
+    </style>
+</head>
+<body>
+    
+    <a href="{{ url_for('logout') }}"><button class="logout"> logout
+           
+    </button></a>
+    <div class="background">
+     
+        
+      </header>
+        <div class="center">
+            <h1>Login</h1>
+            <form id="f" method="POST" action="{{ url_for('login') }}">
+                <div class="txt_field">
+                    <input type="text" id="username" name="username" required />
+                    <label for="username">Username</label>
+                </div>
+                <div class="txt_field">
+                    <input type="password" id="password" name="password" required />
+                    <label for="password">Password</label>
+                </div>
+                <div class="pass">Forgot Password?</div>
+                <div class="btnsub">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                <div class="sign_up">
+                    Create an Account / <a href="{{ url_for('signup') }}">Sign-up</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+   
+  </head>
+  <style>
+    @media screen and (max-width:600px) {
+  .home__data{
+    position: relative;
+    top: -60px;
+  }
+  .home__img{
+    position: relative;
+    bottom: 60%;
+  }
+  .about__img img
+  {
+    margin: auto;
+    align-items: center;
+    width: 60%;
+  }
+
+}
+     /* Adjustments for responsiveness */
+@media screen and (max-width: 768px) {
+  .home__data {
+    text-align: center;
+  }
+  .home__title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  .home__social {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  .home__social-icon {
+    
+  }
+  .home__img {
+    position: relative;
+    width: 80%;
+    margin: auto;
+    
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .home__title {
+    font-size: 2rem;
+  }
+}
+
+
+  </style>
+ <body>
+</head>
+<body>
+  <header class="l-header">
+    <nav class="nav bd-grid">
+        <div class="widthof">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/007/225/199/small_2x/robot-chat-bot-concept-illustration-vector.jpg" alt="logo" class="logoimg">
+            <a href="#" class="nav__logo">Code_निवारण</a>
+        </div>
+        <div class="nav__toggle bottom-2 border-black" id="nav-toggle">&#9776;</div>
+        <div class="nav__menu" id="nav-menu">
+            <ul class="nav__list">
+                <li class="nav__item"><a href="{{ url_for('first') }}" class="nav__link ">Home</a></li>
+                <li class="nav__item"><a href="{{ url_for('about') }}" class="nav__link">About</a></li>
+                <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
+                <li class="nav__item"><a href="{{ url_for('login') }}" class="nav__link">Login</a></li>
+                <li class="nav__item"><a href="{{ url_for('chat') }}" class="nav__link">Chat</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+  <main class="l-main">
+  <section class="about section" id="about">
+    <!-- <h2 class="section-title">About</h2> -->
+
+    <div class="about__container bd-grid">
+      <div class="about__img">
+        <img src="https://img.freepik.com/premium-photo/chatbot-3d-illustration-concept-web-app-using-nlp-engage-conversation_1995-873.jpg?w=1060" alt="" />
+      </div>
+
+      <div class="space">
+        <h2 class="about__subtitle">Code_निवारण</h2>
+        <p class="about__text" style="font-family: Georgia, 'Times New Roman', Times, serif">
+          Welcome to our Code_निवारण, your go-to Chat-section for mastering coding and solving programming challenges with ease. Our chatbot is designed to revolutionize the way you learn to code, offering instant solutions and personalized assistance whenever you need it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!--===== SKILLS =====-->
+  <section class="skills section mb-10 relative " id="skills" style=" position: relative;top: -40px">
+    
+
+    <div class="skills__container bd-grid">
+      
+      <div>
+        <h2 class="skills__subtitle" style="font-size: 30px;">Our Vision</h2>
+        <p class="skills__text" style="font-size: 15px; font-family:Georgia, 'Times New Roman', Times, serif">
+          At Code_निवारण, we are committed to making coding accessible and enjoyable for everyone, from beginners to experienced developers. Our chatbot leverages the latest in AI technology to provide you with accurate and efficient coding help, ensuring you overcome any programming hurdle.
+        </p>
+        <h2 class="skills__subtitle" style="font-size: 30px; margin-top: 20px;">Current Features</h2>
+        <div class="skills__data">
+          
+          <div class="skills__names">
+            
+            
+            <span class="skills__name"></span><span class="skills__name" style="font-size: 15px; font-family:Georgia, 'Times New Roman', Times, serif; ; font-weight: 100;padding: 4px;">
+              Instant Code Solutions: Get quick and reliable answers to your coding questions.
+            </span>
+          </div>
+          <div class="skills__bar skills__html"></div>
+          <div>
+            <span class="skills__percentage"></span>
+          </div>
+        </div>
+        <div class="skills__data">
+          <div class="skills__names">
+          
+            <span class="skills__name"></span><span class="skills__name" style="font-size: 15px; font-family:Georgia, 'Times New Roman', Times, serif; ; font-weight: 100;padding: 4px;">
+              Personalized Assistance: Enjoy a tailored learning experience based on your skill level and interests.
+            </span>
+          </div>
+          <div class="skills__bar skills__css"></div>
+          <div>
+            <span class="skills__percentage"></span>
+          </div>
+        </div>
+        <div class="skills__data">
+          <div class="skills__names">
+           
+            <span class="skills__name"></span><span class="skills__name" style="font-size: 15px; font-family:Georgia, 'Times New Roman', Times, serif; ; font-weight: 100;padding: 4px;">
+              Comprehensive Support: Access a wide range of programming languages and topics.
+            </span>
+          </div>
+          <div class="skills__bar skills__js"></div>
+          
+        </div>
+        <div class="skills__data">
+          <div class="skills__names">
+            <span class="skills__name"></span><span class="skills__name" style="font-size: 15px; font-family:Georgia, 'Times New Roman', Times, serif; ; font-weight: 100;padding: 4px;">
+              User-friendly Interface: Navigate easily through our intuitive chat platform.
+            </span>
+          </div>
+          <div class="skills__bar skills__ux"></div>
+        </div>
+      </div>
+
+      <div class="myimg rounded-none" >
+       <center> <img   src="https://chat360.io/wp-content/uploads/2021/05/Top-10-website-chatbot-examples-of-2022.svg" style="border-radius: 0px; width: 60%;" alt=""></center>
+       
+      </div>
+    </div>
+  </section>
+
+ 
+<footer class="footer mt-4" style="margin-top: 30px;">
+  <p class="fnam">Jaydeep</p>
+  <p></p>
+  <p class="footer__copy">&#169; Bedimcode. All rigths reserved</p>
+</footer>
+
+<!--===== SCROLL REVEAL =====-->
+<script src="https://unpkg.com/scrollreveal"></script>
+
+<!--===== MAIN JS =====-->
+<script src="assets/js/main.js"></script>
+<script>
+  document.getElementById('nav-toggle').onclick = function() {
+            document.getElementById('nav-menu').classList.toggle('active');
+        }
+</script>
+</body>
+</html>
+
+ </body>

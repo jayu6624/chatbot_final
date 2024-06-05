@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+    <header class="l-header">
+        <nav class="nav bd-grid">
+            <div class="widthof">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/007/225/199/small_2x/robot-chat-bot-concept-illustration-vector.jpg"
+                    alt="" class="logoimg" style="width: 50px; height: 50px; display: flex;" />
+                <a href="#" class="nav__logo">Code_निवारण</a>
+            </div>
+            <div class="nav__menu relative top-5" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="{{ url_for('first') }}" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="{{ url_for('about') }}" class="nav__link">About</a></li>
+                    <li class="nav__item"><a href="#contact" class="nav__link">Contact-Us</a></li>
+                    <li class="nav__item" id="right_1"><a href="{{ url_for('login') }}" class="nav__link">Login</a></li>
+                    <li class="nav__item"><a href="{{ url_for('chat') }}" class="nav__link">Chat</a></li>
+                </ul>
+            </div>
+            <div class="nav__toggle" id="nav-toggle">
+                <i class="bx bx-menu"></i>
+            </div>
+        </nav>
+    </header>
+    <div class="background">
+        <div class="center">
+            <h1>Sign-up</h1>
+            <form id="f" method="POST" action="{{ url_for('signup') }}">
+                <div class="txt_field">
+                    <input type="text" id="email" name="email" required />
+                    <label for="email">Email</label>
+                </div>
+                <div class="txt_field">
+                    <input type="text" id="username" name="username" required />
+                    <label for="username">Username</label>
+                </div>
+                <div class="txt_field">
+                    <input type="password" id="password" name="password" required />
+                    <label for="password">Password</label>
+                </div>
+                <div class="btnsub">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <div id="errormes">{{ error }}</div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <footer class="footer" style="bottom: 100%;">
+        <p class="fnam">Jaydeep</p>
+        <p class="footer__copy">&#169; Bedimcode. All rights reserved</p>
+    </footer>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+</html>

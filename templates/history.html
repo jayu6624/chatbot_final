@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <style>
+      body {
+  background: radial-gradient(circle, #ffafbd, #ffc3a0); /* Radial gradient from pink to peach */
+}
+.chat{
+    
+    background-color: rgba(255, 255, 255, 0.748);
+    
+    margin: 4px;
+    align-items: center;
+
+}
+.chats{
+    justify-content: center;
+    
+    width: 50%;
+    margin: auto;
+}
+
+    </style>
+  </head>
+  <body>
+    <center><h1 class="m-auto">that is history page</h1></center>
+
+    <div class="chats ">
+      {% for chat in myChats %}
+      <div class="chat">
+        <ul>
+            <img
+                width="40px"
+                class="top-1 float-left flex "
+                src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+                alt=""
+              />
+          <li class="flex"><p class="single" style="margin: 2px">{{chat.question}}</p></li>
+          
+          <li><p class="single" style="margin: 2px">{{chat.answer}}</p></li>
+        </ul>
+        <button>delete</button>=
+      </div>
+     
+      {% endfor %}
+      >
+    </div>
+  </body>
+</html>

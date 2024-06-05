@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <style>
+      @media screen and (max-width: 600px) {
+        .home__data {
+          position: relative;
+          top: -60px;
+        }
+        .home__img {
+          position: relative;
+          top: -40%;
+        }
+      }
+      @media screen and (max-width: 500px) {
+        .home__img {
+          position: relative;
+          bottom: 130%;
+        }
+      }
+      /* Adjustments for responsiveness */
+      @media screen and (max-width: 768px) {
+        .home__data {
+          text-align: center;
+        }
+        .home__title {
+          font-size: 3rem;
+          margin-bottom: 1rem;
+        }
+
+        .home__img {
+          position: relative;
+          width: 60%;
+          top: 10px;
+          margin: auto;
+        }
+        .home__social {
+          justify-content: center;
+          position: relative;
+
+          display: flex;
+          margin: auto;
+          text-align: center;
+        }
+        .home__social a {
+          margin: 12px;
+        }
+      }
+
+      @media screen and (min-width: 576px) {
+        .home__title {
+          font-size: 2rem;
+        }
+        .home__social {
+          justify-content: center;
+          position: relative;
+
+          display: flex;
+          margin: auto;
+          text-align: center;
+          left: 50%;
+        }
+      }
+      /*  */
+
+      .profileimg {
+        width: 30px;
+        padding: 1px;
+        border: 1px solid black;
+
+        top: 20px;
+        border-radius: 50%;
+      }
+
+      .profile-dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+      }
+
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      .dropdown-content a:hover {
+        background-color: #f1f1f1;
+      }
+
+      .show {
+        display: block;
+      }
+
+      .profileimg {
+        cursor: pointer;
+      }
+    </style>
+    <title>learning platform</title>
+  </head>
+  <body>
+    <!-- <header class="l-header">
+      <nav class="nav bd-grid">
+          <div class="widthof">
+              <img src="https://static.vecteezy.com/system/resources/thumbnails/007/225/199/small_2x/robot-chat-bot-concept-illustration-vector.jpg" alt="logo" class="logoimg">
+              <a href="#" class="nav__logo">Code_निवारण</a>
+          </div>
+          <div class="nav__toggle bottom-2 border-black" id="nav-toggle">&#9776;</div>
+          <div class="nav__menu" id="nav-menu">
+              <ul class="nav__list">
+                  <li class="nav__item"><a href="{{ url_for('first') }}" class="nav__link ">Home</a></li>
+                  <li class="nav__item"><a href="{{ url_for('about') }}" class="nav__link">About</a></li>
+                  <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
+                  <li class="nav__item"><a href="{{ url_for('login') }}" class="nav__link">Login</a></li>
+                  <li class="nav__item"><a href="{{ url_for('chat') }}" class="nav__link">Chat</a></li>
+                  <li class="nav__item"><a href="{{ url_for('logout') }}" class="nav__link">Logout</a>
+                  </li>
+                  <li class="nav__item bdimg w-7"><img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" class="profileimg">
+                  </li>
+              </ul>
+          </div>
+      </nav>
+  </header> -->
+    <header class="l-header">
+      <nav class="nav bd-grid">
+        <div class="widthof">
+          <img
+            src="https://static.vecteezy.com/system/resources/thumbnails/007/225/199/small_2x/robot-chat-bot-concept-illustration-vector.jpg"
+            alt="logo"
+            class="logoimg"
+          />
+          <a href="#" class="nav__logo">Code_निवारण</a>
+        </div>
+        <div class="nav__toggle bottom-2 border-black" id="nav-toggle">
+          &#9776;
+        </div>
+        <div class="nav__menu" id="nav-menu">
+          <ul class="nav__list">
+            <li class="nav__item">
+              <a href="{{ url_for('first') }}" class="nav__link">Home</a>
+            </li>
+            <li class="nav__item">
+              <a href="{{ url_for('about') }}" class="nav__link">About</a>
+            </li>
+            <li class="nav__item">
+              <a href="#contact" class="nav__link">Contact</a>
+            </li>
+            <li class="nav__item">
+              <a href="{{ url_for('login') }}" class="nav__link">Login</a>
+            </li>
+            <li class="nav__item">
+              <a href="{{ url_for('chat') }}" class="nav__link">Chat</a>
+            </li>
+            <li class="nav__item">
+              <a href="{{ url_for('logout') }}" class="nav__link">Logout</a>
+            </li>
+            <li class="nav__item bdimg w-7 profile-dropdown">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+                class="profileimg"
+                id="profile-img"
+              />
+              <div class="dropdown-content" id="dropdown-content">
+                <a href="">Profile</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main class="l-main">
+      <section class="home bd-grid" id="home">
+        <div class="home__data">
+          <h1 class="home__title">
+            <span class="sapn_1">Hi,</span>
+            <br /><span class="sapn_2">I'am </span>
+            <span class="home__title-color" class="sapn_3">Code_निवारण</span>
+            <br /><span class="sapn_4">A Generater</span>
+          </h1>
+          <a href="{{ url_for('login') }}" class="button">Login</a>
+        </div>
+
+        <div class="home__img">
+          <svg
+            class="home__blob"
+            viewBox="0 0 479 467"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <mask id="mask0" mask-type="alpha">
+              <path
+                d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"
+              />
+            </mask>
+            <g mask="url(#mask0)">
+              <path
+                d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"
+              />
+              <image
+                class="home__blob-img"
+                x="-50"
+                y=""
+                href="https://img.freepik.com/free-vector/flat-working-day-scene-with-different-business-people_23-2148946792.jpg?size=626&ext=jpg&ga=GA1.1.625766992.1688508670&semt=ais_user"
+              />
+            </g>
+          </svg>
+        </div>
+        <div class="home__social">
+          <a
+            href="https://www.linkedin.com/in/jaydeep-rathod-994062258/"
+            class="home__social-icon"
+            target="_blanck"
+            ><i class="fa fa-linkedin-square"></i
+          ></a>
+          <a
+            href="https://www.instagram.com/jaydeepp_6624/"
+            target="_blanck"
+            target="_blanck"
+            class="home__social-icon"
+            ><i class="fa fa-instagram" style="color: rgb(135, 98, 150)"></i
+          ></a>
+          <a
+            href="https://github.com/jayu6624"
+            class="home__social-icon"
+            target="_blanck"
+            ><i style="color: black" class="fa fa-github"></i
+          ></a>
+        </div>
+      </section>
+      <!-- <div><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima necessitatibus explicabo cumque officia quidem, doloremque corrupti hic amet, nemo iusto repellendus numquam eligendi. Maxime nam cumque consequatur, eaque beatae laborum culpa aperiam nulla consequuntur accusantium. Doloremque provident excepturi sapiente odio fugiat architecto voluptatibus dolores accusamus perspiciatis mollitia quod iste ab deleniti aut, laboriosam unde odit. Architecto voluptatum repellat ratione, consequatur deleniti, in similique error aliquam ut quos distinctio blanditiis aspernatur minima molestiae! Cupiditate, accusamus incidunt consequatur assumenda accusantium itaque autem quam? Quis mollitia at beatae dolores temporibus qui dolor hic dolore dolorum, quae excepturi tenetur ratione quod similique ullam libero.</p></div> -->
+    </main>
+    <footer class="footer" style="position: relative; top: 30vh">
+      <p class="fnam">Jaydeep</p>
+      <p class="footer__copy">&#169; Bedimcode. All rigths reserved</p>
+    </footer>
+    <script src="{{ url_for('static', filename='js/index.js') }}">
+             document.getElementById('nav-toggle').onclick = function() {
+                  document.getElementById('nav-menu').classList.toggle('active');
+              }
+
+
+              document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("profile-img").onclick = function() {
+          document.getElementById("dropdown-content").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+          if (!event.target.matches('.profileimg')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            for (var i = 0; i < dropdowns.length; i++) {
+              var openDropdown = dropdowns[i];
+              if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+              }
+            }
+          }
+        }
+      });
+    </script>
+    <!-- <script src="assets/js/main.js"></script> -->
+  </body>
+</html>

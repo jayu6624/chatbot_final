@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New chat</title>
+    <link rel="stylesheet" href="/static/css/main.css" />
+    <link
+      rel="shortcut icon"
+      href="https://static.vecteezy.com/system/resources/thumbnails/007/225/199/small/robot-chat-bot-concept-illustration-vector.jpg"
+      type="image/x-icon"
+    />
+    <style>
+      .right1 {
+        display: none;
+      }
+
+      .chats {
+        max-height: calc(
+          100vh - 150px
+        ); /* Adjust based on other elements' height */
+        overflow-y: auto;
+        padding: 10px;
+      }
+
+      .chats::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .chats::-webkit-scrollbar-thumb {
+        background-color: #888;
+        border-radius: 4px;
+      }
+
+      .chats::-webkit-scrollbar-thumb:hover {
+        background-color: #555;
+      }
+      .chats {
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
+      }
+
+      .chats::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .chats::-webkit-scrollbar-thumb {
+        background-color: #4a5568;
+        border-radius: 4px;
+      }
+
+      .chats::-webkit-scrollbar-thumb:hover {
+        background-color: #2b6cb0;
+      }
+
+      .chat {
+        background-color: #4a5568;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .chat:hover {
+        background-color: #2b6cb0;
+      }
+      #solution {
+        font-size: 15px;
+      }
+    </style>
+  </head>
+
+  <body class="bg-chatblack-50">
+    <div class="flex h-[100vh]">
+      <div class="left bg-left-40 w-2/12 text-chatblack-50 h-[100vw]">
+        <center>
+          <button class="newchat" onclick="reloadPage()">
+            New Chat
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon-md justify-around"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M16.7929 2.79289C18.0118 1.57394 19.9882 1.57394 21.2071 2.79289C22.4261 4.01184 22.4261 5.98815 21.2071 7.20711L12.7071 15.7071C12.5196 15.8946 12.2652 16 12 16H9C8.44772 16 8 15.5523 8 15V12C8 11.7348 8.10536 11.4804 8.29289 11.2929L16.7929 2.79289ZM19.7929 4.20711C19.355 3.7692 18.645 3.7692 18.2071 4.2071L10 12.4142V14H11.5858L19.7929 5.79289C20.2308 5.35499 20.2308 4.64501 19.7929 4.20711ZM6 5C5.44772 5 5 5.44771 5 6V18C5 18.5523 5.44772 19 6 19H18C18.5523 19 19 18.5523 19 18V14C19 13.4477 19.4477 13 20 13C20.5523 13 21 13.4477 21 14V18C21 19.6569 19.6569 21 18 21H6C4.34315 21 3 19.6569 3 18V6C3 4.34314 4.34315 3 6 3H10C10.5523 3 11 3.44771 11 4C11 4.55228 10.5523 5 10 5H6Z"
+                fill="currentColor"
+              ></path>
+            </svg>
+          </button>
+        </center>
+        <center>
+          <div class="chats">
+            {% for chat in myChats %}
+            <div class="chat">
+              <svg
+                class="icon-md"
+                stroke="currentColor"
+                fill="none"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                height="1em"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+                style="margin: 2px; position: relative; top: 2px"
+              >
+                <path
+                  d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                ></path>
+              </svg>
+              <span class="single" style="margin: 2px">{{chat.question}}</span>
+            </div>
+            {% endfor %}
+          </div>
+        </center>
+      </div>
+      <div
+        class="right bg-chatblack-50 w-10/12 text-left-40 flex justify-center top-11"
+      >
+        <div class="logowithimg text-center w-full text-3xl font-bold top-">
+          <ul class="qoute flex justify-center items-center box-border top-9">
+            <li>
+              <img
+                class="flex rounded-full p-4 w-36"
+                src="https://static.vecteezy.com/system/resources/thumbnails/007/225/199/small/robot-chat-bot-concept-illustration-vector.jpg"
+                class="flex justify-center items-center"
+                alt=""
+              />
+            </li>
+            <li class="tag flex">Code_निवारण</li>
+          </ul>
+          <div
+            class="text1 textalign flex justify-center items-center box-border top-11 py-9"
+          >
+            What CAN I HELP YOU TODAY?
+          </div>
+          <center>
+          <div class="box-border">
+            <div class="input_w box-border bottom-3" style="height: 300px;">
+              <div class="box-size">
+                <input
+                  class="text_feild text-white h-sc size-6 box-border rounded-md relative bottom-6"
+                  placeholder="Send a Messages"
+                  type="text"
+                  id="questionInput"
+                />
+                <button class="sendbtn" id="sendbutton">
+                  <svg
+                    width="25"
+                    height="25"
+                    viewBox="0 0 22 24"
+                    fill="none"
+                    class="text-white dark:text-black"
+                  >
+                    <path
+                      d="M7 11L12 6L17 11M12 18V7"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </center>
+        </div>
+      </div>
+      <div
+        class="right1 bg-chatblack-50 w-10/12 text-left-40 flex justify-center top-11"
+      >
+        <div class="box1 m-auto flex justify-start w-[10vh] flex-col">
+          <img
+            width="40px"
+            class="top-1 float-left flex"
+            src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+            alt=""
+          />
+          <div id="question1" class="flex">what is your name</div>
+        </div>
+        <div class="box2 m-auto flex justify-start w-[10vh] flex-col">
+          <div class="box flex justify-start w-[40vh] flex-col">
+            <img
+              width="40px"
+              class="bg-slate-700 flex"
+              src="https://static.vecteezy.com/system/resources/thumbnails/007/225/199/small/robot-chat-bot-concept-illustration-vector.jpg"
+              alt=""
+            />
+          </div>
+          <div class="flex flex-col space-7-1"></div>
+          <div class="items-start flex" id="solution">Loading ...</div>
+        </div>
+        <!-- <center>
+          <div class="box-border h-full">
+            <div class="input_w box-border bottom-3">
+              <input
+              
+                class="text_feild text-white h-sc size-6 box-border rounded-md relative bottom-10"
+                placeholder="Send a Messages"
+                type="text"
+                id="question"
+                style="position: relative; top: 47%; font-weight: 700;"
+              />
+              <button class="sendbtn box-border" id="" style="    position: relative;
+              top: 141px;">
+                <svg
+                  width="25"
+                  height="25"
+                  viewBox="0 0 22 24"
+                  fill="none"
+                  class="text-white dark:text-black relative top-5"
+                >
+                  <path
+                    d="M7 11L12 6L17 11M12 18V7"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </center> -->
+      </div>
+    </div>
+    <script src="/static/js/script.js"></script>
+  </body>
+</html>
