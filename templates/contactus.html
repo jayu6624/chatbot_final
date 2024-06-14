@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="">
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #ffffff;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .contact-container {
+        display: flex;
+        max-width: 1030px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        margin: auto;
+      }
+
+      .contact-info {
+        padding: 40px;
+        background: #0d1730;
+        color: #fff;
+        flex: 1;
+      }
+
+      .contact-info h2 {
+        margin-top: 0;
+        font-size: 24px;
+      }
+
+      .contact-info p {
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+
+      .contact-info .info-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .contact-info .info-list li {
+        margin-bottom: 20px;
+      }
+
+      .contact-info .info-list li strong {
+        display: inline-block;
+        width: 80px;
+      }
+
+      .contact-form {
+        padding: 40px;
+        flex: 1.5;
+        background: #fff;
+      }
+
+      .contact-form h2 {
+        margin-top: 0;
+        font-size: 24px;
+        color: #333;
+      }
+
+      .contact-form .form-group {
+        margin-bottom: 20px;
+      }
+
+      .contact-form label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: #333;
+      }
+
+      .contact-form input,
+      .contact-form textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        color: #333;
+        outline: none;
+      }
+
+      .contact-form input:focus,
+      .contact-form textarea:focus {
+        border-color: #0d1730;
+      }
+
+      .contact-form button {
+        background: #0d1730;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background 0.3s;
+      }
+
+      .contact-form button:hover {
+        background: #45a049;
+      }
+    </style>
+  </head>
+  <body><div>
+    <header class="l-header">
+        <nav class="nav bd-grid">
+          <div class="widthof">
+            <img
+              src="https://static.vecteezy.com/system/resources/thumbnails/007/225/199/small_2x/robot-chat-bot-concept-illustration-vector.jpg"
+              alt="logo"
+              class="logoimg"
+            />
+            <a href="#" class="nav__logo">Code_निवारण</a>
+          </div>
+          <div class="nav__toggle bottom-2 border-black" id="nav-toggle">
+            &#9776;
+          </div>
+          <div class="nav__menu" id="nav-menu">
+            <ul class="nav__list">
+              <li class="nav__item">
+                <a href="{{ url_for('first') }}" class="nav__link">Home</a>
+              </li>
+              <li class="nav__item">
+                <a href="{{ url_for('about') }}" class="nav__link">About</a>
+              </li>
+              <li class="nav__item">
+                <a href="#contact" class="nav__link">Contact</a>
+              </li>
+              <li class="nav__item">
+                <a href="{{ url_for('login') }}" class="nav__link">Login</a>
+              </li>
+              <li class="nav__item">
+                <a href="{{ url_for('chat') }}" class="nav__link">Chat</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+    <div class="contact-container">
+      <div class="contact-info">
+        <h2>Contact Us</h2>
+        <p style="margin-top: 20px;">
+          Feel free to get in touch with us for any inquiries, feedback, or
+          support.
+        </p>
+        <ul class="info-list">
+          <li><strong>Address:</strong>Shop no-607 near by Atul complex Rajkot, Gujarat</li>
+          <li><strong>Email:</strong> jaydeeprathod6624@gamil.com</li>
+          <li><strong>Phone:</strong> +91 8401605624</li>
+        </ul>
+      </div>
+      <div class="contact-form">
+        <h2>Send Us a Message</h2>
+        <form action="/submit_contact_form" method="POST">
+          <div class="form-group">
+            <label for="name" class="" style="margin-top: 10px;">Name</label>
+            <input type="text" id="name" name="name" placeholder="Name" required style="" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+    <footer class="footer mt-4" style="position: relative; top:20vh; width:100vw">
+        <p class="fnam">Jaydeep</p>
+        <p></p>
+        <p class="footer__copy">&#169; Bedimcode. All rigths reserved</p>
+      </footer>
+    </div>
+  </body>
+</html>

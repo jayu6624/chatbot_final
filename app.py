@@ -1,10 +1,16 @@
-from flask import Flask, render_template, jsonify, request, url_for, redirect, session
+from flask import Flask, render_template, jsonify, request, url_for, redirect, flash, session
 from flask_pymongo import PyMongo
 import google.generativeai as genai
 import os
-import re
+import random
+import string
+import smtplib
+from email.message import EmailMessage
 from bson.objectid import ObjectId
-import datetime
+from datetime import datetime, timedelta, timezone
+from pygments import highlight
+from pygments.lexers import get_lexer_by_name
+from pygments.formatters import HtmlFormatter
 
 app = Flask(__name__)
 
@@ -34,10 +40,100 @@ safety_settings = [
 app.config["MONGO_URI"] = "mongodb://localhost:27017/chatgpt"
 mongo = PyMongo(app)
 
+def generate_token(length=32):
+    characters = string.ascii_letters + string.digits
+    return ''.join(random.choice(characters) for _ in range(length))
+
+# Function to send email with password reset link
+def send_reset_email(email, token):
+    reset_link = f"http://localhost:5002/reset_password?token={token}"
+    msg = EmailMessage()
+    msg.set_content(f"To reset your password, click the link below:\n\n{reset_link}")
+    msg['Subject'] = 'Password Reset'
+    msg['From'] = 'jaydeeprathod6624@gmail.com'  # Replace with your email
+    msg['To'] = email
+
+    try:
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+            smtp.login('jaydeeprathod6624@gmail.com', 'jayu@6624')  # Replace with your app password
+            smtp.send_message(msg)
+            print("Email sent successfully")
+    except smtplib.SMTPServerDisconnected:
+        print("Server disconnected. Reconnecting...")
+        send_reset_email(email, token)  # Retry sending email
+    except Exception as e:
+        print(f"Error sending email: {e}")
+
+# Route for requesting password reset
+@app.route("/forgotpass", methods=["GET", "POST"])
+def forgot():
+    if request.method == "POST":
+        email = request.form["email"]
+        user = mongo.db.users.find_one({"email": email})
+        if user:
+            # Generate a token and store it with a timestamp in the database
+            token = generate_token()
+            expire_time = datetime.now(timezone.utc) + timedelta(hours=1)  # Token valid for 1 hour
+            mongo.db.password_reset_tokens.insert_one({
+                "email": email,
+                "token": token,
+                "expire_at": expire_time
+            })
+            # Send email with password reset link
+            send_reset_email(email, token)
+            flash("Password reset instructions sent to your email.")
+            return redirect(url_for("login"))
+        else:
+            flash("Email not found. Please enter a valid email address.")
+            return render_template("forgotpass.html")
+    return render_template("forgotpass.html")
+
+# Route for handling password reset link
+@app.route("/reset_password", methods=["GET", "POST"])
+def reset_password():
+    if request.method == "GET":
+        token = request.args.get("token")
+        if token:
+            # Check if token exists and is valid
+            token_doc = mongo.db.password_reset_tokens.find_one({"token": token})
+            if token_doc and token_doc["expire_at"] > datetime.now(timezone.utc):
+                # Render a form to reset password
+                session["reset_email"] = token_doc["email"]  # Store email in session
+                return render_template("reset_password.html")
+            else:
+                flash("Invalid or expired reset link.")
+                return redirect(url_for("login"))
+        else:
+            flash("Invalid reset link.")
+            return redirect(url_for("login"))
+    
+    elif request.method == "POST":
+        new_password = request.form["new_password"]
+        confirm_password = request.form["confirm_password"]
+        
+        if new_password != confirm_password:
+            flash("Passwords do not match. Please try again.")
+            return render_template("reset_password.html")
+        
+        email = session.get("reset_email")
+        if email:
+            # Update user's password in the database
+            mongo.db.users.update_one({"email": email}, {"$set": {"password": new_password}})
+            flash("Password updated successfully. You can now log in with your new password.")
+            # Cleanup: Remove the used token from the collection
+            mongo.db.password_reset_tokens.delete_one({"email": email})
+            session.pop("reset_email")
+            return redirect(url_for("login"))
+        else:
+            flash("Session expired. Please try again.")
+            return redirect(url_for("login"))
+
 @app.route("/")
 def first():
     return render_template('main.html')
-
+@app.route("/contactus")
+def contactus():
+    return render_template("/contactus.html")
 @app.route("/chat")
 def chat():
     if 'username' in session:
@@ -66,7 +162,7 @@ def login():
             return redirect(url_for('first'))
         else:
             error = 'Invalid username or password'
-            return render_template('login.html', error=error)
+            return render_template('invalid.html', error=error)
     return render_template('login.html')
 
 @app.route("/logout")
@@ -80,7 +176,7 @@ def history():
     if 'username' in session:
         # Retrieve the logged-in user's chat history
         user = mongo.db.users.find_one({'username': session['username']})
-        chats = mongo.db.chats.find({'_id': user['_id']})
+        chats = mongo.db.chats.find({'user_id': user['_id']})
         myChat = [chat for chat in chats]
         return render_template('history.html', myChats=myChat)
     else:
@@ -97,7 +193,6 @@ def signup():
 
         return redirect(url_for('login'))
     return render_template('signup.html')
-
 @app.route("/api", methods=["POST"])
 def qa():
     if request.method == "POST":
@@ -121,15 +216,11 @@ def qa():
                 response = chat_session.send_message(question)
                 
                 answer = response.text.strip()
-                answer = re.sub(r'[^a-zA-Z0-9\s]', '', answer)
+
+                # Format the answer if it contains code
+                formatted_answer = format_code(answer, question)
                 
-                try:
-                    result = int(answer)
-                    answer = str(result)
-                except ValueError:
-                    pass
-                
-                final = re.sub(r'[^a-zA-Z0-9\s]', '', answer)
+                final = formatted_answer
                 mongo.db.chats.insert_one({
                     "question": question, 
                     "answer": final, 
@@ -137,13 +228,52 @@ def qa():
                     "timestamp": datetime.datetime.utcnow()
                 })
                 data = {"result": final}
+
+                print(data)
             except Exception as e:
                 data = {"result": f"Error: {str(e)}"}
 
         return jsonify(data)
 
+def format_code(code, question):
+    # Determine the programming language from the question
+    language = detect_language(question)
+    if not language:
+        return code  # Return the code as is if language detection fails
+
+    # Format the code using Pygments
+    try:
+        lexer = get_lexer_by_name(language)
+        formatter = HtmlFormatter()
+        formatted_code = highlight(code, lexer, formatter)
+        return formatted_code
+    except Exception as e:
+        return code  # Return the code as is if formatting fails
+
+def detect_language(question):
+    # Simple heuristic to detect language from the question
+    if "java" in question.lower():
+        return "java"
+    elif "python" in question.lower():
+        return "python"
+    elif "javascript" in question.lower():
+        return "javascript"
+    elif "c++" in question.lower():
+        return "cpp"
+    elif "c#" in question.lower():
+        return "csharp"
+    elif "ruby" in question.lower():
+        return "ruby"
+    elif "go" in question.lower():
+        return "go"
+    elif "php" in question.lower():
+        return "php"
+    # Add more languages as needed
+    return None
+
 if __name__ == "__main__":
     app.run(debug=True, port=5002)
+
 
 
 

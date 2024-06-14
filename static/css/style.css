@@ -776,3 +776,23 @@ body {
 .space{
   animation: bounceInLeftRight  2s;
 }
+
+
+@keyframes bounceInLeftRight1 {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.skills__data{
+  animation: bounceInLeftRight1  1s;
+}
+
+.myimg1{
+  animation : bounceInLeftRight1 1s
+}

@@ -63,22 +63,38 @@
 <body>
   <header class="l-header">
     <nav class="nav bd-grid">
-        <div class="widthof">
-            <img src="https://static.vecteezy.com/system/resources/thumbnails/007/225/199/small_2x/robot-chat-bot-concept-illustration-vector.jpg" alt="logo" class="logoimg">
-            <a href="#" class="nav__logo">Code_निवारण</a>
-        </div>
-        <div class="nav__toggle bottom-2 border-black" id="nav-toggle">&#9776;</div>
-        <div class="nav__menu" id="nav-menu">
-            <ul class="nav__list">
-                <li class="nav__item"><a href="{{ url_for('first') }}" class="nav__link ">Home</a></li>
-                <li class="nav__item"><a href="{{ url_for('about') }}" class="nav__link">About</a></li>
-                <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
-                <li class="nav__item"><a href="{{ url_for('login') }}" class="nav__link">Login</a></li>
-                <li class="nav__item"><a href="{{ url_for('chat') }}" class="nav__link">Chat</a></li>
-            </ul>
-        </div>
+      <div class="widthof">
+        <img
+          src="https://static.vecteezy.com/system/resources/thumbnails/007/225/199/small_2x/robot-chat-bot-concept-illustration-vector.jpg"
+          alt="logo"
+          class="logoimg"
+        />
+        <a href="#" class="nav__logo">Code_निवारण</a>
+      </div>
+      <div class="nav__toggle bottom-2 border-black" id="nav-toggle">
+        &#9776;
+      </div>
+      <div class="nav__menu" id="nav-menu">
+        <ul class="nav__list">
+          <li class="nav__item">
+            <a href="{{ url_for('first') }}" class="nav__link">Home</a>
+          </li>
+          <li class="nav__item">
+            <a href="{{ url_for('about') }}" class="nav__link">About</a>
+          </li>
+          <li class="nav__item">
+            <a href="{{url_for('contactus')}}" class="nav__link">Contact</a>
+          </li>
+          <li class="nav__item">
+            <a href="{{ url_for('login') }}" class="nav__link">Login</a>
+          </li>
+          <li class="nav__item">
+            <a href="{{ url_for('chat') }}" class="nav__link">Chat</a>
+          </li>
+        </ul>
+      </div>
     </nav>
-</header>
+  </header>
 
   <main class="l-main">
   <section class="about section" id="about">
@@ -157,7 +173,7 @@
       </div>
 
       <div class="myimg rounded-none" >
-       <center> <img   src="https://chat360.io/wp-content/uploads/2021/05/Top-10-website-chatbot-examples-of-2022.svg" style="border-radius: 0px; width: 60%;" alt=""></center>
+       <center> <img  class="myimg1" src="https://chat360.io/wp-content/uploads/2021/05/Top-10-website-chatbot-examples-of-2022.svg" style="border-radius: 0px; width: 60%;" alt=""></center>
        
       </div>
     </div>

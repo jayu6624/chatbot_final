@@ -13,26 +13,25 @@
     </style>
 </head>
 <body>
+    <div>
     
-    <a href="{{ url_for('logout') }}"><button class="logout"> logout
-           
-    </button></a>
     <div class="background">
      
         
       </header>
         <div class="center">
+            <a href="{{url_for('logout')}}" class="" style="background-color: rgb(86, 86, 86); color: aliceblue; padding: 7px; text-decoration: none; border-radius: 10px;  top: 2px;">logout</a>
             <h1>Login</h1>
             <form id="f" method="POST" action="{{ url_for('login') }}">
                 <div class="txt_field">
-                    <input type="text" id="username" name="username" required />
+                    <input type="text" id="username" name="username" required style="color: black; font-weight: 600; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;" />
                     <label for="username">Username</label>
                 </div>
                 <div class="txt_field">
                     <input type="password" id="password" name="password" required />
                     <label for="password">Password</label>
                 </div>
-                <div class="pass">Forgot Password?</div>
+                <a href="{{url_for('forgot')}}" class="pass">Forgot Password?</a>
                 <div class="btnsub">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
@@ -42,7 +41,7 @@
             </form>
         </div>
     </div>
-    
+</div>
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 </body>
 </html>
